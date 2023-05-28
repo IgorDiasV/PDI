@@ -3,7 +3,7 @@ import numpy as np
 
 nbits = 3
 
-esteganografia = cv2.imread('esteganografia.png', cv2.IMREAD_COLOR)
+esteganografia = cv2.imread('imagens/desafio-esteganografia.png', cv2.IMREAD_COLOR)
 
 if esteganografia is None:
     print("imagem nao carregou corretamente")
@@ -31,4 +31,5 @@ for i in range(esteganografia.shape[0]):
         imagemPortadora[i, j] = [valPortadora[0], valPortadora[1], valPortadora[2]]
         imagemEscondida[i, j] = [valEscondida[0], valEscondida[1], valEscondida[2]]
 
-cv2.imwrite("Imagem_escondida.png", imagemEscondida)
+cv2.imwrite("imagens/Imagem_principal.png", imagemPortadora)
+cv2.imwrite("imagens/Imagem_escondida.png", imagemEscondida)
