@@ -66,3 +66,56 @@ cv2.waitKey()
 resultado da troca de quadrantes:
 
 ![Imagem com os quadrantes trocados](/Exercicios/imagens/biel_troca_quadrantes.png )
+
+## 4.3. Exercícios 
+
+### Esteganografia
+
+Nesse exercício foi fornecido uma imagem que continha uma outra escondida nela. Para formar a imagem foram utilizados os 5 bits mais significativos para a imagem principal e os 3 bits menos significativos para a imagem que ficaria escondida. Para resolver esse problema foi criado duas variáveis para armazenar, uma para armazenar a imagem principal e a outra para a imagem escondida. Após isso, foi percorrido todos os pixels da imagem e deslocado o valor encontrado 3 pixels para direita e depois 3 pixels para a esquerda, com isso, ficamos com apenas o valor dos 5 pixels mais significativos e atribuímos esse valor a variável que vai armazenar a imagem principal. Para a imagem escondida, precisamos apenas subtrair o valor do pixel da imagem original pelo valor encontrado dos 5 bits mais significativos. O código, a imagem original e a imagem escondida podem ser vistos abaixo.
+
+```python
+import cv2
+import numpy as np
+
+nbits = 3
+
+esteganografia = cv2.imread('imagens/desafio-esteganografia.png', cv2.IMREAD_COLOR)
+
+if esteganografia is None:
+    print("imagem nao carregou corretamente")
+    exit(-1)
+
+shape_esteganografia = np.shape(esteganografia)
+imagemPortadora = np.zeros(shape_esteganografia)
+imagemEscondida = np.zeros(shape_esteganografia)
+
+for i in range(esteganografia.shape[0]):
+    for j in range(esteganografia.shape[1]):
+        
+        valesteganografia = esteganografia[i, j]
+        valPortadora = [0,0,0]
+        valEscondida = [0,0,0]
+        
+        valPortadora[0] = valesteganografia[0] >> nbits << nbits
+        valPortadora[1] = valesteganografia[1] >> nbits << nbits
+        valPortadora[2] = valesteganografia[2] >> nbits << nbits
+
+        valEscondida[0] = (valesteganografia[0] - valPortadora[0]) << (8 - nbits)
+        valEscondida[1] = (valesteganografia[1] - valPortadora[1]) << (8 - nbits)
+        valEscondida[2] = (valesteganografia[2] - valPortadora[2]) << (8 - nbits)
+
+        imagemPortadora[i, j] = [valPortadora[0], valPortadora[1], valPortadora[2]]
+        imagemEscondida[i, j] = [valEscondida[0], valEscondida[1], valEscondida[2]]
+
+cv2.imwrite("imagens/Imagem_principal.png", imagemPortadora)
+cv2.imwrite("imagens/Imagem_escondida.png", imagemEscondida)
+```
+
+![Imagem original](/Exercicios/imagens/desafio-esteganografia.png)
+###### Imagem Original
+
+</br>
+</br>
+
+![Imagem Escondida](/Exercicios/imagens/Imagem_escondida.png)
+###### Imagem Escondida
