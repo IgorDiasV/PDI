@@ -199,3 +199,21 @@ cv2.waitKey()
 ![Terminal](/Exercicios/imagens/terminal_exericio_5_2.png)
 
 ###### Figura 7 - Resultado da execução
+
+
+## 6.2. Exercícios
+
+### Equalização de Histograma
+
+
+Para esse exercício foi fornecido um código que calcula o histograma de uma imagem e mostra ele na tela. A ideia dessa atividade é equalizar uma determinada imagem e mostrar a diferença provocada pela equalização. Realizar a equalização do histograma com OpenCV é extremamente simples, basta utilizar o comando equalizeHist. 
+Na figura 8 é apresentado um exemplo de imagem com histograma desbalanceado e na figura 9 a mesma imagem após a aplicação da equalização de histograma.
+
+![Imagem Com Histograma Desbalanceado](/Exercicios/imagens/imagem_histograma_desbalanceado.jpeg)
+
+###### Figura 8 - Imagem com histograma desbalanceado
+
+
+![Imagem com histograma balanceado](/Exercicios/imagens/imagem_equalizada.jpeg)
+
+###### Figura 9 - Imagem com histograma equalizado
