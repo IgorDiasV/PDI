@@ -34,8 +34,7 @@ cv2.waitKey()
 ```
 
 Aplicando o código nas coordenadas de P1(50, 100) e P2(170, 220) obtemos o seguinte resultado: 	
-
-<!-- ![Imagem com uma região em negativo](/Exercicios/imagens/biel_negativo.png ) -->
+![Imagem com uma região em negativo](/Exercicios/imagens/biel_negativo.png)
 
 ### Troca de quadrantes da imagem 
 
@@ -64,8 +63,8 @@ cv2.imshow("Exercicio 2.2 Trocando os quadrantes", img2)
 cv2.waitKey()
 ```
 resultado da troca de quadrantes:
+![Imagem com os quadrantes trocados](/Exercicios/imagens/biel_troca_quadrantes.png)
 
-<!-- ![Imagem com os quadrantes trocados](/Exercicios/imagens/biel_troca_quadrantes.png ) -->
 
 ## 4.3. Exercícios 
 
@@ -130,6 +129,8 @@ O código do labeling  que foi fornecido percorre toda a imagem e sempre que enc
 
 ###### Figura 5 - Bolhas
 
-![Figura 5 após aplicação do algoritmo](/Exercicios/imagens/bolhas.png)
+![Figura 5 após aplicação do algoritmo](/Exercicios/imagens/resultado_labeling.png)
 
 ###### Figura 6 - Figura 5 após aplicação do algoritmo
+
+Um dos problemas do algoritmo anterior é que em imagens que possuem mais de 255 objetos fica inviável, já que, temos apenas 256 tons de cinza. A solução que encontrei para esse problema foi atribuir um único tom de cinza para todos os objetos da imagem.
