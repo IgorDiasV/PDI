@@ -33,12 +33,6 @@ for x in range(height):
             bolhasTotais+=1
             cv2.floodFill(imagem, None, (y, x), 125)
 
-
-
-
-print(f"bolhas restantes {bolhasTotais}")
-
-
 #pintando o fundo de branco, sendo asssim, restando apenas os buracos com a cor preta.
 # o floodFill foi atribuido ao ponto 0,0 pois foi removido as bolhas das bordas, com isso, sabemos que nao teria nenhuma bolha nessa regiao
 cv2.floodFill(imagem, None, (0, 0), 255)
@@ -51,6 +45,6 @@ for x in range(height):
             cv2.floodFill(imagem, None, (y, x), 125)
 
 
-print(f" bolhas sem buraco {bolhasTotais - buracos} - bolhas com buraco {buracos}")            
+print(f"\n\n bolhas sem buraco {bolhasTotais - buracos} - bolhas com buraco {buracos}\n\n")            
 cv2.imshow("imagem", imagem)
 cv2.waitKey()
