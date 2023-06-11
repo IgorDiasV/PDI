@@ -35,7 +35,7 @@ cv2.waitKey()
 
 Aplicando o código nas coordenadas de P1(50, 100) e P2(170, 220) obtemos o seguinte resultado: 	
 
-![Imagem com uma região em negativo](/Exercicios/imagens/biel_negativo.png )
+<!-- ![Imagem com uma região em negativo](/Exercicios/imagens/biel_negativo.png ) -->
 
 ### Troca de quadrantes da imagem 
 
@@ -65,13 +65,13 @@ cv2.waitKey()
 ```
 resultado da troca de quadrantes:
 
-![Imagem com os quadrantes trocados](/Exercicios/imagens/biel_troca_quadrantes.png )
+<!-- ![Imagem com os quadrantes trocados](/Exercicios/imagens/biel_troca_quadrantes.png ) -->
 
 ## 4.3. Exercícios 
 
 ### Esteganografia
 
-Nesse exercício foi fornecido uma imagem que continha uma outra escondida nela. Para formar a imagem foram utilizados os 5 bits mais significativos para a imagem principal e os 3 bits menos significativos para a imagem que ficaria escondida. Para resolver esse problema foi criado duas variáveis para armazenar, uma para armazenar a imagem principal e a outra para a imagem escondida. Após isso, foi percorrido todos os pixels da imagem e deslocado o valor encontrado 3 pixels para direita e depois 3 pixels para a esquerda, com isso, ficamos com apenas o valor dos 5 pixels mais significativos e atribuímos esse valor a variável que vai armazenar a imagem principal. Para a imagem escondida, precisamos apenas subtrair o valor do pixel da imagem original pelo valor encontrado dos 5 bits mais significativos. O código, a imagem original e a imagem escondida podem ser vistos abaixo.
+Nesse exercício foi fornecido uma imagem que continha uma outra escondida nela. Para formar a imagem foram utilizados os 5 bits mais significativos para a imagem principal e os 3 bits menos significativos para a imagem que ficaria escondida. Para resolver esse problema foi criado duas variáveis, uma para armazenar a imagem principal e a outra para a imagem escondida. Após isso, foi percorrido todos os pixels da imagem e deslocado o valor encontrado 3 pixels para direita e depois 3 pixels para a esquerda, com isso, ficamos com apenas o valor dos 5 pixels mais significativos e atribuímos esse valor a variável que vai armazenar a imagem principal. Para a imagem escondida, precisamos apenas subtrair o valor do pixel da imagem original pelo valor encontrado dos 5 bits mais significativos. O código, a imagem original e a imagem escondida podem ser vistos abaixo.
 
 ```python
 import cv2
@@ -112,10 +112,24 @@ cv2.imwrite("imagens/Imagem_escondida.png", imagemEscondida)
 ```
 
 ![Imagem original](/Exercicios/imagens/desafio-esteganografia.png)
-###### Imagem Original
+###### Figura 3 - Imagem Original
 
-</br>
-</br>
+
+
 
 ![Imagem Escondida](/Exercicios/imagens/Imagem_escondida.png)
-###### Imagem Escondida
+###### Figura 4 - Imagem Escondida
+
+## Exercício 5.2
+
+### Labeling 
+
+O código do labeling  que foi fornecido percorre toda a imagem e sempre que encontrar um pixel com o tom de cinza 255 incrementa a contagem de objetos e aplica o floodFill do OpenCV. Para cada objeto encontrado é utilizado no floodFill um tom de cinza diferente. Foi utilizado esse algoritmo na  figura 5 que no final de execução ficou como mostrado na figura 6.
+
+![Bolhas](/Exercicios/imagens/bolhas.png)
+
+###### Figura 5 - Bolhas
+
+![Figura 5 após aplicação do algoritmo](/Exercicios/imagens/bolhas.png)
+
+###### Figura 6 - Figura 5 após aplicação do algoritmo
