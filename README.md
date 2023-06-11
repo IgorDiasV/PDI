@@ -7,6 +7,7 @@
 ## 2.2. Exercícios 
 
 ### Negativo de uma imagem
+
 O objetivo desse exercício era calcular o negativo de uma  região, de uma imagem qualquer. Essa região é determinada pelo usuário. Para isso, é necessário utilizar um laço duplo que vai percorrer todos os pixels da região escolhida e trocar seus valores. Os novos valores dos pixels vão ser calculados da seguinte forma: 255 - x. x é o tom de cinza atual do pixel. O código completo pode ser visto abaixo.
 
 ```python
@@ -34,7 +35,9 @@ cv2.waitKey()
 ```
 
 Aplicando o código nas coordenadas de P1(50, 100) e P2(170, 220) obtemos o seguinte resultado: 	
+
 ![Imagem com uma região em negativo](/Exercicios/imagens/biel_negativo.png)
+###### Figura 1 - Imagem com uma região em negativo
 
 ### Troca de quadrantes da imagem 
 
@@ -63,8 +66,9 @@ cv2.imshow("Exercicio 2.2 Trocando os quadrantes", img2)
 cv2.waitKey()
 ```
 resultado da troca de quadrantes:
-![Imagem com os quadrantes trocados](/Exercicios/imagens/biel_troca_quadrantes.png)
 
+![Imagem com os quadrantes trocados](/Exercicios/imagens/biel_troca_quadrantes.png)
+###### Figura 2 - Imagem com os quadrantes trocados
 
 ## 4.3. Exercícios 
 
@@ -134,3 +138,64 @@ O código do labeling  que foi fornecido percorre toda a imagem e sempre que enc
 ###### Figura 6 - Figura 5 após aplicação do algoritmo
 
 Um dos problemas do algoritmo anterior é que em imagens que possuem mais de 255 objetos fica inviável, já que, temos apenas 256 tons de cinza. A solução que encontrei para esse problema foi atribuir um único tom de cinza para todos os objetos da imagem.
+
+Foi solicitado um aprimoramento no algoritmo. A ideia é que o programa seja capaz de contar quantas bolhas possuem buracos e quantas não possuem, sem considerar as que estão na borda.
+
+Esse problema foi resolvido em alguns passos simples. O primeiro passo consistiu em percorrer a primeira e a última linha e também a primeira e a última coluna. Caso seja encontrado qualquer objeto é aplicado nele o floodFill atribuindo a cor preta. Dessa forma,  removemos todas as bolhas que tocavam as bordas. O segundo passo consistiu em aplicar o algoritmo do labeling para contar quantas bolhas ainda estavam presentes na imagem. No terceiro passo foi aplicado o algoritmo do floodFill com a cor branca no posição (0, 0), com intuito de permanecer na imagem com a cor preta apenas os buracos que ficavam dentro das bolhas. Após isso, foi aplicado o algoritmo do labeling, com um ajuste para contar apenas objetos da cor preta. Feito isso, obtém-se a quantidade de bolhas que possuem buracos. Para encontrar  quantas bolhas não possuem, basta realizar uma subtração entre a quantidade de bolhas totais e as que possuem buracos. O código e o resultado da execução podem ser vistos abaixo.
+
+```python
+import cv2
+imagem = cv2.imread("imagens/bolhas.png",cv2.IMREAD_GRAYSCALE)
+width = imagem.shape[1]
+height = imagem.shape[0]
+
+
+#removendo as bolhas da parte superior e inferior
+for x in [0,height-1]:
+    for y in range(width):
+        if imagem[x][y] == 255 :
+
+
+            cv2.floodFill(imagem, None, (y, x), 0)
+
+
+#removendo as bolhas das laterais
+#          
+for x in range(height):
+    for y in [0,width-1]:
+        if imagem[x][y] == 255 :
+
+
+            cv2.floodFill(imagem, None, (y, x), 0)  
+
+
+cv2.imshow("imagem", imagem)
+cv2.waitKey()
+#contando quantas bolhas tem ao todo e atribuindo uma cor qualquer
+bolhasTotais = 0
+for x in range(height):
+    for y in range(width):
+        if imagem[x][y] == 255 :
+            bolhasTotais+=1
+            cv2.floodFill(imagem, None, (y, x), 125)
+
+#pintando o fundo de branco, sendo asssim, restando apenas os buracos com a cor preta.
+# o floodFill foi atribuido ao ponto 0,0 pois foi removido as bolhas das bordas, com isso, sabemos que nao teria nenhuma bolha nessa regiao
+cv2.floodFill(imagem, None, (0, 0), 255)
+
+buracos = 0
+for x in range(height):
+    for y in range(width):
+        if imagem[x][y] == 0 :
+            buracos+=1
+            cv2.floodFill(imagem, None, (y, x), 125)
+
+
+print(f"\n\n bolhas sem buraco {bolhasTotais - buracos} - bolhas com buraco {buracos}\n\n")            
+cv2.imshow("imagem", imagem)
+cv2.waitKey()
+```
+
+![Terminal](/Exercicios/imagens/terminal_exericio_5_2.png)
+
+###### Figura 7 - Resultado da execução
