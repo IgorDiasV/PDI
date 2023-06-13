@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 
-image = cv2.imread('imagens/imagem_histograma_desbalanceado.jpeg')
+image = cv2.imread('imagens/imagem_histograma_desbalanceado_original.jpeg')
 
 
 width, height = image.shape[1], image.shape[0]
@@ -55,6 +55,8 @@ equalize_image[2 * histh:3 * histh, 0:nbins] = histImg_equalize
 cv2.imshow("image", image)
 cv2.imshow("Imagem equalizada", equalize_image)
 cv2.waitKey()
+
+cv2.imwrite('imagens/imagem_histograma_desbalanceado.jpeg', image)
 
 cv2.imwrite('imagens/imagem_equalizada.jpeg', equalize_image)
 
