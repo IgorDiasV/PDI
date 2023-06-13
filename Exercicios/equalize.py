@@ -28,7 +28,7 @@ histw = nbins
 histh = nbins // 2
 
 
-histImgB = np.zeros((histh, histw), dtype=np.uint8)
+histImg = np.zeros((histh, histw), dtype=np.uint8)
 histImg_equalize = np.zeros((histh, histw), dtype=np.uint8)
 
 while True:
@@ -44,19 +44,19 @@ while True:
     hist_equalize = cv2.calcHist([planes_equalize[0]], [0], None, [nbins], histrange, accumulate=accumulate)
     
     
-    cv2.normalize(histB, histB, 0, histImgB.shape[0], cv2.NORM_MINMAX, -1)
+    cv2.normalize(histB, histB, 0, histImg.shape[0], cv2.NORM_MINMAX, -1)
     cv2.normalize(hist_equalize, hist_equalize, 0, histImg_equalize.shape[0], cv2.NORM_MINMAX, -1)
 
     
 
-    histImgB.fill(0)
+    histImg.fill(0)
     histImg_equalize.fill(0)
     for i in range(nbins):
-        cv2.line(histImgB, (i, histh), (i, histh - int(histB[i])), (255, 0, 0), 1, 8, 0)
+        cv2.line(histImg, (i, histh), (i, histh - int(histB[i])), (255, 0, 0), 1, 8, 0)
         cv2.line(histImg_equalize, (i, histh), (i, histh - int(hist_equalize[i])), (255, 0, 0), 1, 8, 0)
 
 
-    image[2 * histh:3 * histh, 0:nbins] = histImgB
+    image[2 * histh:3 * histh, 0:nbins] = histImg
     equalize_image[2 * histh:3 * histh, 0:nbins] = histImg_equalize
 
 
