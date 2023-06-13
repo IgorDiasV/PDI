@@ -45,7 +45,6 @@ while True:
     frame32f = np.float32(framegray)
     frameFiltered = cv2.filter2D(frame32f, -1, mask, anchor=(1, 1), delta=0, borderType=cv2.BORDER_DEFAULT)
     if lastKey == ord('d'):
-        print('entrou')
         maskLaplaciano = np.array(laplacian).reshape(3, 3)
         frameFiltered = cv2.filter2D(frameFiltered, -1, maskLaplaciano, anchor=(1, 1), delta=0, borderType=cv2.BORDER_DEFAULT)
 
@@ -84,4 +83,3 @@ while True:
         printmask(mask)
     elif key == ord('d'):
         mask = np.array(gauss).reshape(3, 3)
-        printmask(mask)
