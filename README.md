@@ -70,6 +70,12 @@ resultado da troca de quadrantes:
 ![Imagem com os quadrantes trocados](/Exercicios/imagens/biel_troca_quadrantes.png)
 ###### Figura 2 - Imagem com os quadrantes trocados
 
+## 3.2. Exercícios
+### YAML X PNG
+
+A ideia desse exercício é verificar se existe alguma diferença entre salvar um arquivo de imagem utilizando png e utilizando yaml. Sabendo que o png realiza uma compressão de dados e o yaml armazena bem mais informação é esperado que ocorra uma diferença entre os dois arquivos e é o que foi constatado na execução da tarefa. Abaixo podemos ver a diferença encontrada quando comparado os pixels iniciais da imagem.
+
+![Matriz de diferenças entre um arquivo PNG e YAML](/Exercicios/imagens/dif_yaml_png.png)
 ## 4.3. Exercícios 
 
 ### Esteganografia
@@ -319,3 +325,5 @@ A seguir, temos a imagem original, com aplicação do filtro laplaciano e com a 
 
 ![Filtro Laplaciano Gaussiano](/Exercicios/imagens/laplagaus.png)
 ###### Figura 12 - Figura 10 com o filtro laplaciano do gaussiano
+
+
