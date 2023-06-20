@@ -3,7 +3,7 @@
 # Exercícios realizados durante a disciplina
 
 ## Primeira Unidade
-
+## Processamento de Imagens no Domínio Espacial
 ## 2.2. Exercícios 
 
 ### Negativo de uma imagem
@@ -326,4 +326,10 @@ A seguir, temos a imagem original, com aplicação do filtro laplaciano e com a 
 ![Filtro Laplaciano Gaussiano](/Exercicios/imagens/laplagaus.png)
 ###### Figura 12 - Figura 10 com o filtro laplaciano do gaussiano
 
+## Segunda Unidade
+## Processamento de Imagens no Domínio da Frequência
 
+## 9.2. Exercícios
+
+![](/Exercicios/imagens/espectro_figura7.png)
+###### Figura 13 - Espectro de magnitude da senoide
