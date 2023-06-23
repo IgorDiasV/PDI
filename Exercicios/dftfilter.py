@@ -19,18 +19,20 @@ def swapQuadrants(imagem):
     return imagem_modificada.copy()
 
 def makeFilter(image, filter, radius=20):
-    filter2D = np.zeros((image.shape[0], image.shape[1]), dtype=np.float32)
+
+    filter2D = np.float32(np.zeros((image.shape[0], image.shape[1])))
+
     centerX = image.shape[1] // 2
     centerY = image.shape[0] // 2
 
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
-            if (i - centerY)**2 + (j - centerX)**2 <= radius**2:
+            if (((i - centerY)**2 + (j - centerX)**2) <= (radius**2)):
                 filter2D[i, j] = 1
 
-    planes = [filter2D, np.zeros(filter2D.shape, dtype=np.float32)]
+    planes = [filter2D.copy(), np.float32(np.zeros(filter2D.shape))]
     filter = cv2.merge(planes, filter)
-    return filter
+    return filter.copy()
 
 image = cv2.imread('imagens/biel2.png', cv2.IMREAD_GRAYSCALE)
 if image is None:
@@ -40,28 +42,27 @@ if image is None:
 dft_M = cv2.getOptimalDFTSize(image.shape[0])
 dft_N = cv2.getOptimalDFTSize(image.shape[1])
 padded = cv2.copyMakeBorder(image, 0, dft_M - image.shape[0], 0, dft_N - image.shape[1], cv2.BORDER_CONSTANT, value=0)
-planos = [padded, np.zeros(padded.shape, dtype=np.float32)]
-planos[0] = planos[0].astype(float)
-planos[1] = planos[1].astype(float)
+planos = [np.float32(padded), np.float32(np.zeros_like(padded))]
+
+
 complexImage = cv2.merge(planos)
 
-cv2.dft(complexImage, complexImage)
+complexImage = cv2.dft(complexImage)
 complexImage = swapQuadrants(complexImage)
+filter = np.float32(np.zeros_like(padded))
 
-filter = np.zeros(complexImage.shape, dtype=np.float32)
-filter = makeFilter(complexImage, filter)
+filter = makeFilter(complexImage.copy(), filter.copy())
 
-complexImage = complexImage.astype(float)
-filter = filter.astype(float)
+
 complexImage = cv2.mulSpectrums(complexImage, filter, 0)
 
-swapQuadrants(complexImage)
-cv2.idft(complexImage, complexImage)
+complexImage = swapQuadrants(complexImage)
+complexImage = cv2.idft(complexImage)
 
-cv2.split(complexImage, planos)
+planos = cv2.split(complexImage)
 result = planos[0]
 
-cv2.normalize(result, result, 0, 1, cv2.NORM_MINMAX)
+result = cv2.normalize(result, None, 0, 1, cv2.NORM_MINMAX)
 
 cv2.imshow("image", result)
 cv2.imwrite("dft-filter.png", result * 255)
