@@ -479,6 +479,7 @@ cv2.destroyAllWindows()
 O filtro foi aplicado na Figura 8, o resultado e os valores utilizados nos parâmetros podem ser vistos na Figura 15. Na figura 16 é mostrado o filtro gerado.
 
 ![](/Exercicios/imagens/ajuste_do_histograma.png)
+
 ###### Figura 15 - Correção na iluminação da figura 6
 
 
@@ -520,3 +521,34 @@ for i in range(1,11):
 ![](/Exercicios/imagens/resultado_kmeans.gif)
 
 ###### Figura 17 - Resultados do algoritmo k-means
+
+## 13.2. Exercícios
+
+## Morfologia
+
+Nesse exercício foram fornecidos os dígitos presentes na figura 18 e foi pedido para aplicar operações de morfologia para remover os espaços que existem entre os traços que formam um dígito. A solução encontrada foi utilizar uma estrutura de 4x10 e aplicar uma operação de abertura. O resultado obtido pode ser visto na figura 19.
+
+![](/Exercicios/imagens/digitos.png)
+###### Figura 18 - Digitos de exemplo 
+
+![](/Exercicios/imagens/digitos_morf.png)
+###### Figura 19 - Digitos após aplicar o a operação de morfologia
+
+```python
+import cv2
+import numpy as np
+
+caminho = 'imagens/digitos.png'
+
+
+image = cv2.imread(caminho, cv2.IMREAD_UNCHANGED)
+
+str_element = cv2.getStructuringElement(cv2.MORPH_RECT, (4, 10))
+
+image = cv2.morphologyEx(image, cv2.MORPH_OPEN, str_element)
+
+cv2.imshow("morfologia", image)
+cv2.imwrite('imagens/digitos_morf.png', image)
+cv2.waitKey(0)
+
+```
