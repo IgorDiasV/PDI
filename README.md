@@ -484,3 +484,39 @@ O filtro foi aplicado na Figura 8, o resultado e os valores utilizados nos parâ
 
 ![](/Exercicios/imagens/filtro.png)
 ###### Figura 16 - Filtro utilizado na figura 6
+
+## 12.2. Exercícios
+## K-means
+
+Nessa prática foi pedido para executar o algoritmo de k-means configurando ele  para executar apenas uma rodada e com o centro definido de forma aleatória. O intuito é mostrar  que cada execução terá um  resultado diferente. Foi realizado esse teste 10 vezes e gerou resultados diferentes para cada uma delas. As imagens resultantes de cada execução podem ser vistas no gif abaixo. 
+
+```python
+import sys
+import cv2
+import numpy as np
+
+nClusters = 8
+nRodadas = 1
+
+for i in range(1,11):
+    caminho = 'imagens/sushi.jpg'
+    img = cv2.imread(caminho, cv2.IMREAD_COLOR)
+    samples = np.float32(img.reshape(-1, 3))
+
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10000, 0.0001)
+    flags = cv2.KMEANS_RANDOM_CENTERS
+
+    compactness, labels, centers = cv2.kmeans(samples, nClusters, None, criteria, nRodadas, flags)
+
+    centers = np.uint8(centers)
+    res = centers[labels.flatten()]
+    res = res.reshape((img.shape))
+
+
+    cv2.imwrite(f'imagens/kmeans/sushi_rodada{i}.jpg', res)
+
+```
+
+![](/Exercicios/imagens/resultado_kmeans.gif)
+
+###### Figura 17 - Resultados do algoritmo k-means
