@@ -522,7 +522,7 @@ for i in range(1,11):
 
 ###### Figura 17 - Resultados do algoritmo k-means
 
-## 13.2. Exercícios
+## 13.2 Exercícios
 
 ## Morfologia
 
@@ -532,7 +532,7 @@ Nesse exercício foram fornecidos os dígitos presentes na figura 18 e foi pedid
 ###### Figura 18 - Digitos de exemplo 
 
 ![](/Exercicios/imagens/digitos_morf.png)
-###### Figura 19 - Digitos após aplicar o a operação de morfologia
+###### Figura 19 - Digitos após aplicar a operação de morfologia
 
 ```python
 import cv2
